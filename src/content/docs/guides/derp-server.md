@@ -1,6 +1,6 @@
 ---
-title: Setting up custom DERP for Tailscale
-description: A guide for setting up a Tailscale DERP server behind a non-standard HTTPS port 
+title: Custom DERP Server
+description: A guide for setting up a Tailscale DERP server in non-standard conditions
 ---
 
 ## What is this for? 

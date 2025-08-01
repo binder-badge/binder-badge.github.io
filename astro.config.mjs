@@ -7,20 +7,14 @@ export default defineConfig({
 	site: 'https://entering.theworkpc.com',
 	integrations: [
 		starlight({
-			title: 'My Homelab shenanigans',
+			title: "A Nerd's Notebook",
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
 			sidebar: [
 				{
 					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Custom DERP Server', slug: 'guides/derp-server' },
-					],
+					autogenerate: { directory: 'guides' }						
 				},
-				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
-				},
+				
 			],
 		}),
 	],

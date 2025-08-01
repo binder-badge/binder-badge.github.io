@@ -4,7 +4,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://entering.theworkpc,com",
+	site: "https://entering.theworkpc.com",
 	integrations: [
 		starlight({
 			title: 'My Docs',

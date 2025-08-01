@@ -7,7 +7,7 @@ export default defineConfig({
 	site: "https://entering.theworkpc.com",
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'My Homelab shenanigans',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
 			sidebar: [
 				{

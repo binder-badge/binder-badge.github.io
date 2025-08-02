@@ -8,13 +8,20 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: "A Nerd's Notebook",
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/binder-badge/binder-badge.github.io' }],
 			sidebar: [
 				{
 					label: 'Guides',
 					autogenerate: { directory: 'guides' }						
 				},
-				
+				{
+					label: 'Headscale',
+					autogenerate: { directory: 'headscale' }						
+				},
+				{
+					label: 'Homelab',
+					autogenerate: { directory: 'homelab' }						
+				},
 			],
 		}),
 	],

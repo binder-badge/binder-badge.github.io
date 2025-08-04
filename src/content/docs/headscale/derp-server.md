@@ -191,14 +191,14 @@ This assumes you've completed the first time setup for NPM+ and can access the a
 - Set the `Domain/IP + optional path` to `derper`
 - Set the `Port` to 80
 
-![](/src/assets/npm2.jpg) 
+![](../../../assets/npm2.jpg) 
 
 3. On the `TLS` tab
 - Request a new certificate
 - Agree to Let's Encrypt Terms of Service
 - Force HTTPS
 
-![](/src/assets/npm3.jpg) 
+![](../../../assets/npm3.jpg) 
 
 4. Save the configuration
 

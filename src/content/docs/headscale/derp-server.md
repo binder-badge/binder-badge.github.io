@@ -144,20 +144,14 @@ cd ..
 mkdir derper && cd derper
 ```
 
-2. Add a folder to the DERP relay folder
-
-```sh
-mkdir certs
-```
-
-3. Make a `docker-compose.yaml` and open it
+2. Make a `docker-compose.yaml` and open it
 
 ```sh
 touch docker-compose.yml
 nano docker-compose.yml
 ```
 
-4. Edit `docker-compose.yaml` to have this text
+3. Edit `docker-compose.yaml` to have this text
 
 ```yaml
 services:
@@ -180,7 +174,7 @@ networks:
 - Don't forget to change `derp.domain` to the domain or subdomain you have setup for the server.  
 - You will need to expose the STUN port. You may need to go to your server provider's firewall to open the port as well as on the server itself. 
 
-6. Spin up the DERP relay!
+4. Spin up the DERP relay!
 ```sh
 docker compose up -d
 ```
@@ -190,7 +184,7 @@ This assumes you've completed the first time setup for NPM+ and can access the a
 
 1. Add a new `Proxy Host`
 
-![](/src/assets/npm1.jpg) 
+![](../../../assets/npm1.jpg) 
 
 2. On the `Details` tab
 - Add your DERP domain or subdomain to your `Domain Names`

@@ -2,6 +2,9 @@
 title: Proxying Minecraft with FRP
 description: A guide for proxying a Minecraft server using FRP
 ---
+## Introduction
+This guide is for running a proxy for Minecraft in the more literal sense. This will not go over how to setup a proxy like Velocity and setting up routing from a single proxy server to multiple Minecraft servers. This is for setting up a tunnel connection between a public proxy server and a Minecraft server. People will send traffic to the public server, which then gets directed to the Minecraft server. 
+
 ## Backstory
 So imagine yourself in this situation. You've just setup a new Minecraft server. You can play on it by yourself, on your own network,no issue. However, there's a problem. Some friends (or a friend, whatever case you're in) want to join you. Now you need to somehow expose it to the public internet so that your friends can join. Maybe you can't port forward as you're behind CGNAT. Maybe you're not comfortable with poking holes in your firewall and exposing your home network to the outside.
 
@@ -119,7 +122,7 @@ nano frpc.toml # command for opening file
 ```
 
 ```toml
-serverAddr = "server.domain.or.ip
+serverAddr = "server.domain.or.ip"
 serverPort = 7000
 auth.method = "token"
 auth.token = "insert-super-secret-token"
@@ -152,7 +155,7 @@ Congrats, you have now connected your home Minecraft server to your public `frp`
 ## Further Reading
 Now that you have setup `frp` and connected your home server to your public server, there are a few things you can do to further improve this. 
 
-### Autostarting
+### Auto-starting
 With `frps` and `frpc` left as is, you would need to manually restart them every time you reboot either your home server, or the public server. This can be solved with setting up an auto-start service on both your home server and the public server. 
 
 1. On the public server, create `/etc/systemd/system/frps.service`
@@ -190,3 +193,29 @@ sudo systemctl status frps.service
 ```
 
 On your home server, the process is identical. Just replace `frps` with `frpc`.  
+
+
+### Using a Java Minecraft server
+If you're running a Java server instead of a Bedrock similar, the only thing that needs to be changed is the `iptables` command used and the `frp` configs used on both the server and client. 
+
+#### Server Changes
+Instead of running:
+```sh
+sudo iptables -I INPUT 6 -m state --state NEW -p udp --dport 19132 -j ACCEPT
+``` 
+you would instead run:
+```sh
+sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 25565 -j ACCEPT
+```
+This would expose TCP port 25565 on the server, as that is the default port of a Java server. If you chose to use a different port, replace 25565 with your desired port. 
+#### Client Changes
+In your `frpc.toml`, replace your `[[proxies]]` section with the text below.
+```toml
+[[proxies]]
+name = "java-server"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 25565
+remotePort = 25565
+```
+- If you Minecraft server is on a different port, simply replace the value of `localPort` to your desired port number. 

@@ -67,4 +67,4 @@ I shut down the machine, plugged in a spare 250GB SATA SSD and my Ventoy USB. I 
 Once I stopped, I got to work on testing the other components. Plugged in the IO board, all ports on it worked and was being seen by Mint. The stereo speakers worked and played sound on both sides. The power button board contained a power button, and powered on the machine when i pressed the button. The DVD druve was tossed to the sude as I wasn't planning to use it and was going to be replaced by a DVD drive replacement shell for an extra hard drive. Now it was time to move onto the next phase, planning and brainstoming. 
 
 ## Planning and Brainstorming
-Now that I know that all the parts that I needed worked, I can finally start moving parts around to map out a layout to use 
+Now that I know that all the parts that I needed are functional, I can finally start moving parts around to map out a layout to use 

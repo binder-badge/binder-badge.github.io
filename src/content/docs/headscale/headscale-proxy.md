@@ -12,4 +12,21 @@ Now this is nice and all, but what if you want to be more independent, or are ru
 ## How it works
 The way that this works is pretty simple. Your VPS and home server would both be connected to the same Headscale tailnet. You would have a service on your home server accessible that is accessible to that VPS. On the VPS, you would then reverse proxy that connection, making the service accessible under a nice domain and with HTTPS. You're getting a domain and HTTPS as the domain belongs to the VPS, and the VPS is also handling TLS via its own reverse proxy. 
 
+Below is a simple diagram of how this setup would work using an example service like Navidrome, a self-hosted music server.
+
 ![](../../../assets/hs-proxy-diagram.png)
+
+## Setup 
+For this, you'll need a few things. 
+- A publicly accessible VPS
+- Your internal server
+Once you have the required things, you can start making your own makeshift proxy!
+
+1. Connect both your public VPS, and your internal server to your Tailnet. 
+
+2. Verify that both your VPS and internal server can communicate via their Tailscale connections. 
+- You can do this by having one machine ping the other via their Tailscale hostnames, or through their Tailscale IP
+
+3. Once you've connected the machines to Tailscale and verified that they can talk to each other via Tailscale, you have a few ways of setting up a service to be Tailscale-accessible. 
+- If your service is set up to listen to all interfaces on a specific port, you can just try to access the service using the Tailscale IP or domain with the corresponding port. 
+- You can setup the service to listen in on the Tailscale interface on a specific port.  

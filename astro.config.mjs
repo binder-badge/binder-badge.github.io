@@ -23,7 +23,7 @@ export default defineConfig({
 					autogenerate: { directory: 'homelab' }						
 				},
 				{
-					label: 'Shinanegans',
+					label: 'Random Shinanegans',
 					autogenerate: { directory: 'shinanegans' }						
 				},
 			],

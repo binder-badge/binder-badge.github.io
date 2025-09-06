@@ -60,6 +60,7 @@ services:
 - You will need to expose the non-standard HTTPS port and STUN port. You may need to go to your server provider's firewall to open the port as well as on the server itself. 
 
 5. Get Let's Encrypt HTTPS certificates for your domain. 
+
 You'll need an A record on your DNS provider that points your domain or subdomain to your server's IP. After that, you run a tool like Certbot to grab a certificate for your domain using the HTTP-01 challenge. Make sure that the server has ports 80 and 443 open. Once you get your certificates, you can point the volumes in `docker-compose.yml` to the location of your `fullchain.pem` and `privkey.pem` or paste your certificates into your `certs` folder. 
 
 6. Spin up the DERP relay!
@@ -205,6 +206,7 @@ This assumes you've completed the first time setup for NPM+ and can access the a
 ## Testing connectivity to the DERP server
 This assumes you have Tailscale installed on your client and can use the Tailsclae CLI. 
 To add your DERP server to your Tailnet, you can follow the steps provided by Tailscale [here](https://tailscale.com/kb/1118/custom-derp-servers#add-the-custom-derp-servers-to-your-tailnet). 
+
 Once you have added it to your Tailnet policy, you can test connectivity to your DERP relay using `tailscale debug derp <region-id>`. 
 An successful DERP connection will look something like this. 
 ```json

@@ -6,9 +6,9 @@ description: A guide for proxying a Minecraft server using FRP
 This guide is for running a proxy for Minecraft in the more literal sense. This will not go over how to setup a proxy like Velocity and setting up routing from a single proxy server to multiple Minecraft servers. This is for setting up a tunnel connection between a public proxy server and a Minecraft server. People will send traffic to the public server, which then gets directed to the Minecraft server. 
 
 ## Backstory
-So imagine yourself in this situation. You've just setup a new Minecraft server. You can play on it by yourself, on your own network,no issue. However, there's a problem. Some friends (or a friend, whatever case you're in) want to join you. Now you need to somehow expose it to the public internet so that your friends can join. Maybe you can't port forward as you're behind CGNAT. Maybe you're not comfortable with poking holes in your firewall and exposing your home network to the outside.
+So imagine yourself in this situation. You've just setup a new Minecraft server. You can play on it by yourself, on your own network, no issue. However, there's a problem. Some friends (or a friend, whatever case you're in) want to join you in your new Minecraft server. With your new guests wanting to join in, you need to somehow expose it to the public internet so that your friends can join. You can port forward and directly expose your Minecraft server on its designated but maybe you can't port forward as you're behind CGNAT. Maybe you're not comfortable with poking holes in your firewall and exposing your home network to the public internet.
 
-I found myself in this situation a while back, as I was setting up a Minecraft server for myself and someone else to play on. I had VPN access back to my house, but that wasn't really great as it would allow only me to play on the server, and my friend would need to install my VPN in order to remote back into my house and play. 
+I found myself in this situation a while back, as I was setting up a Minecraft server for myself and someone else to play on. I had VPN access back to my house, but that wasn't really great as it would allow only me to play on the server, and my friend would need to install my VPN software and configure it to join my VPN in order to remote back into my house and play. 
 
 I looked for some ways to expose my Minecraft server without having to port forward on my home network. I banged my head against the wall for a while. It was not fun. I tried [playit.gg](https://playit.gg/), [rathole](https://github.com/rathole-org/rathole), iptables port forwarding, and NGINX streams. All seemed to either not work at all, or be unreliable in my case. I tried destroying and recreating my public server to no avail.
 
@@ -16,7 +16,7 @@ I looked for some ways to expose my Minecraft server without having to port forw
 After a few weeks of suffering, I stumbled upon [frp](https://github.com/fatedier/frp). It looked slightly intimidating, but was overall nice to setup. This program will need to be installed on both the Minecraft server and your public server. The Minecraft server is considered the client while your public server is considered the server. I will be referring to them as such. Here is a guide on how I've set it up for my Minecraft server(s):
 
 ### Requirements
-- A computer running the Minecraft server
+- A computer running the Minecraft server (This guide assumes it runs Linux)
 - A public Linux server with the ability to expose ports
 
 ### Server setup
@@ -64,7 +64,7 @@ bindPort = 7000
 auth.method = "token"
 auth.token = "insert-super-secret-token"
 ```
-This configuration will tell `frps` to run on port 7000 and setup authentication using a simple token. Of course, replace the sample token with a new string of text. You will also need this token later. 
+This configuration will tell `frps` to run on port 7000 and setup authentication using a simple token. Of course, replace the sample token with a new token you made. You will also need this token later. 
 
 Take note of the IP or domain that you used for your public server, as we'll need that later as well.
 
@@ -80,9 +80,9 @@ sudo netfilters-persistent reload
 frps -c /path/to/frps.toml
 ```
 
-Congrats, you have now setup a `frp` server! Now to have your client (at-home Minecraft server) connect to it!
+Congrats, you have now setup a `frp` server! Now we will have your client (at-home Minecraft server) connect to it!
 
-### Client setup
+### Client Setup
 1. Download the latest release from the [frp](https://github.com/fatedier/frp) Github using this command (good enough for 99% of cases, v0.63.0 was the latest version at the time of release)
 ```sh
 wget -O frp.tar.gz https://github.com/fatedier/frp/releases/download/v0.63.0/frp_0.63.0_linux_amd64.tar.gz
@@ -218,4 +218,4 @@ localIP = "127.0.0.1"
 localPort = 25565
 remotePort = 25565
 ```
-- If you Minecraft server is on a different port, simply replace the value of `localPort` to your desired port number. 
+- If your Minecraft server is on a different port, simply replace the value of `localPort` to your desired port number. 

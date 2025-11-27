@@ -131,7 +131,7 @@ Now that both machines have working PiHole and Unbound instances that work well 
 
 ## The End is Here (Final Configuration)
 I now had a pretty robust DNS setup in my homelab. 
-I had 2 PiHole instances that each use an Unbound instance as its upstream server. Unbound was acting as both a root DNS server and a recursive DNS server. The instances were also on seperate machines, providing redundancy in the case that one or the other dies due to some totally unknown cosmic (ie me) force. The instances we're also synced with each other, keeping consistency between the 2. Both instances of PiHole also 
+I had 2 PiHole instances that each use an Unbound instance as its upstream server. Unbound was acting as both a root DNS server and a recursive DNS server. The instances were also on seperate machines, providing redundancy in the case that one or the other dies due to some totally unknown cosmic (ie me) force. The instances we're also synced with each other, keeping consistency between the 2. Both instances of PiHole also had their web UIs behind a reverse proxy, providing a nice domain name for each, as well as HTTPS. 
 
 This is the final `docker-compose.yml` for the DNS stack: 
 ```yaml

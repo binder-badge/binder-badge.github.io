@@ -25,8 +25,9 @@ Once you have the required things, you can start making your own makeshift proxy
 1. Connect both your public VPS, and your internal server to your Tailnet. 
 
 2. Verify that both your VPS and internal server can communicate via their Tailscale connections. 
-- You can do this by having one machine ping the other via their Tailscale hostnames, or through their Tailscale IP
+    - You can do this by having one machine ping the other via their Tailscale hostnames, or through their Tailscale IP
 
-3. Once you've connected the machines to Tailscale and verified that they can talk to each other via Tailscale, you have a few ways of setting up a service to be Tailscale-accessible. 
-- If your service is set up to listen to all interfaces on a specific port, you can just try to access the service using the Tailscale IP or domain with the corresponding port. 
-- You can setup the service to listen in on the Tailscale interface on a specific port.  
+3. Once you've connected the machines to your Headscale network and verified that they can talk to each other via Tailscale, you have a few ways of setting up a service to be Tailscale-accessible. 
+    - If your service is set up to listen to all interfaces on a specific port, you can just try to access the service using the Tailscale IP or the Tailscale domain with the corresponding port. 
+    - You can setup the service to listen in on the Tailscale interface on a specific port.  
+4. (Optional) After that, you can choose to set up an ACL to further lock down the public VPS's access into your Tailnet.  

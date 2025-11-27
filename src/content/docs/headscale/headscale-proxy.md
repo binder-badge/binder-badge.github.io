@@ -31,3 +31,19 @@ Once you have the required things, you can start making your own makeshift proxy
     - If your service is set up to listen to all interfaces on a specific port, you can just try to access the service using the Tailscale IP or the Tailscale domain with the corresponding port. 
     - You can setup the service to listen in on the Tailscale interface on a specific port.  
 4. (Optional) After that, you can choose to set up an ACL to further lock down the public VPS's access into your Tailnet.  
+
+## VPS setup
+Now all you need to do on the VPS is to just run a reverse proxy. Depending on the service, you might need to set it up in a special way. However, in this case its relatively simple. All I would need to do is to configure a route to the remote service, which can be done in any reverse proxy of your choice. I will just go over how to configure it in Traefik as that's the reverse proxy I use on my VPS, but the similar concept applies to all other popular reverse proxies like Caddy, and Nginx. 
+
+This assumes that you have a Traefik instance already setup.
+In your dynamic configuration file, you'll add this set of text.
+```yaml
+http:
+    routers:
+        rule: Host('music.domain.com')
+    services:
+        music-server:
+            loadbalancers:
+                servers:
+                    - url: http://100.64.0.1:4533
+```

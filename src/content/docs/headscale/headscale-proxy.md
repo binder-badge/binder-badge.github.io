@@ -18,20 +18,35 @@ Below is a simple diagram of how this setup would work using an example service 
 
 ## Setup 
 For this, you'll need a few things. 
+- A VPS running Headscale
 - A publicly accessible VPS
 - Your internal server
+
 Once you have the required things, you can start making your own makeshift proxy!
 
-1. Connect both your public VPS, and your internal server to your Tailnet. 
+1. Connect both your public VPS, and your internal server to your Headscale tailnet. 
 
 2. Verify that both your VPS and internal server can communicate via their Tailscale connections. 
-    - You can do this by having one machine ping the other via their Tailscale hostnames, or through their Tailscale IP
+    - You can do this by having one machine ping the other via their Tailscale hostnames, or through their Tailscale IPs.
 
 3. Once you've connected the machines to your Headscale network and verified that they can talk to each other via Tailscale, you have a few ways of setting up a service to be Tailscale-accessible. 
-    - If your service is set up to listen to all interfaces on a specific port, you can just try to access the service using the Tailscale IP or the Tailscale domain with the corresponding port. 
+    - If your service is set up to listen to all interfaces on a specific port, you can just try to access the service using the Tailscale IP or the Tailscale domain with the corresponding port. `curl`ing the IP and port combination is a great way to test reachability. 
     - You can setup the service to listen in on the Tailscale interface on a specific port.  
-4. (Optional) After that, you can choose to set up an ACL to further lock down the public VPS's access into your Tailnet.  
+4. (Optional) After that, you can choose to set up an ACL to further lock down the public VPS's access into your Tailnet. Headscale ACLs follow the same syntax and general concepts as standard Tailscale ACLs, so more information can be found [here](https://tailscale.com/kb/1018/acls). Below is a snippet of my ACL that I've made for my own use. Names and specific IPs have been obfuscated and replaced with generics. 
+```json
+{
+    "acls":[
 
+    { "action": "accept", "src": ["public-vps"], "dst": ["home-server:4533"] },
+    ... (other parts of my config)
+    "hosts":{
+        "home-server": "100.64.0.2",
+        "public-vps": "100.64.0.3",
+        ... (other hosts)
+    }
+}
+
+```
 ## VPS setup
 Now all you need to do on the VPS is to just run a reverse proxy. Depending on the service, you might need to set it up in a special way. However, in this case its relatively simple. All I would need to do is to configure a route to the remote service, which can be done in any reverse proxy of your choice. I will just go over how to configure it in Traefik as that's the reverse proxy I use on my VPS, but the similar concept applies to all other popular reverse proxies like Caddy, and Nginx. 
 

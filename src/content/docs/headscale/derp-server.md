@@ -48,7 +48,7 @@ services:
       - 3478:3478/udp
       - 8443:443
     environment:
-      - DERP_DOMAIN=derp.domain
+      - DERP_DOMAIN=derp.domain.com
       - DERP_ADDR=:443
       - DERP_HTTP_PORT=-1
       - DERP_CERT_MODE=manual
@@ -73,7 +73,8 @@ You can also host a DERP relay behind your reverse proxy and run it behind ports
 This guide will go over setting up a DERP relay behind [Nginx Proxy Manager+](https://github.com/ZoeyVid/NPMplus)
 
 ### How does this work?
-Normally, the DERP port will be 443 and you will be forced to use TLS, which usually doesnt work well with reverse proxies, which people usually use to handle TLS to their services. 
+Normally, the DERP port will be 443 and you will be forced to use TLS. This usually doesn't work very well with reverse proxies, which people usually use to handle TLS to their services. 
+
 However, if you use 80 as the DERP port, it will not use TLS, and serve normal HTTP. This would allow the reverse proxy to take over, and allow it to handle TLS for the DERP relay. 
 
 ### Setting up Nginx Proxy Manager+ (NPM+)
@@ -120,7 +121,7 @@ networks:
   proxy:
     external: true
 ``` 
-- You will need to expose the ports 80 and 443. You may need to go to your server provider's firewall to open the port as well as on the server itself. 
+- You will need to expose the ports 80 and 443. You may need to go to your server provider's firewall to open the port on their side as well as on the server itself. 
 - Port 81 will also have to be exposed for NPM+'s admin panel. You can setup the panel behind a domain or subdomain and not need to expose port 81. 
 
 5. Create a Docker network for NPM+
@@ -165,7 +166,7 @@ services:
     networks:
       - proxy
     environment:
-      - DERP_DOMAIN=derp.friendlyguy.casacam.net
+      - DERP_DOMAIN=derp.domain.com
       - DERP_ADDR=:80
       - DERP_HTTP_PORT=80
 networks:

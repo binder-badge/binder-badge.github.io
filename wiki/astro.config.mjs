@@ -6,6 +6,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	site: 'https://entering.theworkpc.com',
 	base: '/wiki/',
+	outDir: './dist/wiki',
 	integrations: [
 		starlight({
 			title: "A Nerd's Notebook",

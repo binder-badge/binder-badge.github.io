@@ -91,7 +91,6 @@ services:
       - traefik.http.middlewares.auth.basicauth.users=admin:hashedpass
     volumes:
       - ./data:/data
-      - ./cert-dumps:/cert-dumps
     working_dir: /data
 networks:
   proxy:

@@ -2,7 +2,7 @@
 This is where I host the files and articles for my personal wiki!. I write my articles as Markdown files, and the framwork I use for my wiki is Astro. 
 Some of the topics I cover inlcude homelabbing, server administration, and some personal projects. 
 
-The domain I run my wiki on is https://entering.theworkpc.com and is hosted using Github Pages. 
+The site I run my wiki on is https://entering.theworkpc.com/wiki and is hosted using Github Pages. 
 ## 🧞 Commands for running locally
 
 All commands are run from the root of the project, from a terminal:

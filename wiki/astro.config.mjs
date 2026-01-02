@@ -5,6 +5,7 @@ import starlight from '@astrojs/starlight';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://entering.theworkpc.com',
+	base: 'wiki/',
 	integrations: [
 		starlight({
 			title: "A Nerd's Notebook",

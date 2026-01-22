@@ -46,7 +46,7 @@ jobs:
 
       # consolidate compiled files
       - name: Copy needed files into /dist
-        run: mkdir -p dist/wiki && cp -r ./wiki/dist/* ./dist/wiki/ && cp -r ./portfolio/dist/portfolio/* ./dist/ && cp CNAME ./dist
+        run: mkdir -p dist/wiki && cp -r ./wiki/dist/* ./dist/wiki/ && cp -r ./portfolio/dist/portfolio/* ./dist/ && cp CNAME ./dist && mv ./dist/browser/* ./dist/ && rmdir ./dist/browser 
 
       - name: Upload artifacts
         id: deployment

@@ -35,7 +35,7 @@ jobs:
 
       # prep for deployment
       - name: Move and clean up files
-        run: mv CNAME ./dist && mv ./dist/browser/* ./dist/server/* ./dist/ && rmdir ./dist/browser ./dist/server
+        run: mv CNAME ./dist/portfolio/* ./dist && mv ./dist/browser/* ./dist/server/* ./dist/ && rmdir ./dist/browser ./dist/server
 
       - name: Upload artifacts
         id: deployment

@@ -31,25 +31,16 @@ jobs:
         working-directory: portfolio
         run: npm install
 
-      - name: Build portfolio
+      - name: Build site
         working-directory: portfolio
         run: npm run build -- --configuration production --base-href "/"
 
-      # wiki build
-      - name: Install Astro dependencies
-        working-directory: wiki
-        run: npm install
-
-      - name: Build wiki
-        working-directory: wiki
-        run: npm run build
-
       # consolidate compiled files
       - name: Copy needed files into /dist
-        run: mkdir -p dist/wiki && cp -r ./wiki/dist/* ./dist/wiki/ && cp -r ./portfolio/dist/portfolio/* ./dist/
-        
+        run: mkdir dist && cp -r ./portfolio/dist/portfolio/* ./dist/
+
       - name: Move and clean up files
-        run: cp CNAME ./dist && mv ./dist/browser/* ./dist/ && rmdir ./dist/browser 
+        run: cp CNAME ./dist && mv ./dist/browser/* ./dist/server/* ./dist/ && rmdir ./dist/browser ./dist/server
 
       - name: Upload artifacts
         id: deployment

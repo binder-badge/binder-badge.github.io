@@ -33,10 +33,7 @@ jobs:
       - name: Build site
         run: npm run build -- --configuration production --base-href "/"
 
-      # consolidate compiled files
-      - name: Copy needed files into /dist
-        run: mkdir dist && cp -r ./portfolio/dist/portfolio/* ./dist/
-
+      # prep for deployment
       - name: Move and clean up files
         run: mv CNAME ./dist && mv ./dist/browser/* ./dist/server/* ./dist/ && rmdir ./dist/browser ./dist/server
 
